@@ -8,17 +8,18 @@ class CountrySelect extends Component {
     list: [],
     value: '',
   };
+  //passes data to hook 
   change(e) {
     this.props.setSelectedCountry(e);
   }
-
+  // initialises data when component gets loaded once
   componentDidMount() {
     let locallist = [];
     Data.map(item => {
       locallist.push(item.location);
     });
 
-    let unique = [...new Set(locallist)];
+    let unique = [...new Set(locallist)]; //seprates duplicate entries
 
     this.setState({
       list: unique,
