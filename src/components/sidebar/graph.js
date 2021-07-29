@@ -9,7 +9,7 @@ class Graph extends Component {
     ],
     list: [],
   };
-
+  // initilises the graph data then further used to change it as per selection on 2nd and third index
   initData(country, gases) {
     let finalList = [];
     let list = [];
@@ -44,12 +44,12 @@ class Graph extends Component {
       list: finalList,
     });
   }
-
+  // inits data when component is mounted calles another function
   componentDidMount() {
     this.initData(this.props.country, this.props.gases);
   }
   render() {
-    let pramList = [...new Set(this.props.gases)];
+    let pramList = [...new Set(this.props.gases)]; //seprates unique entries
     console.log(pramList);
     return (
       <div
