@@ -15,29 +15,32 @@ class Map extends Component {
 
   returnCoordinates = () => {
     let coor = [];
+    let arr = [];
     Data.forEach((item) => {
       if (item.location == this.props.country) {
         coor.push([item.lang, item.lat]);
       }
     });
-    this.setState({
-      center: coor[1],
-    });
+    arr.push(coor[1][0]);
+    arr.push(coor[1][1]);
+    console.log(arr);
+
+    return arr;
   };
-  componentDidMount() {
-    this.returnCoordinates();
-    console.log(this.state.center)
+  componentDidMount = async () => {
+    let circle = await this.returnCoordinates();
+    console.log(circle)
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: this.state.center[1],
+      center: circle,
       zoom: this.state.zoom,
     });
-  }
+  };
   render() {
     return (
       <div className='div'>
-        <h1>{this.state.center[0], this.state.center[1]}</h1>
+        <h1>{(this.state.center[0], this.state.center[1])}</h1>
         <div
           ref={(el) => (this.mapContainer = el)}
           style={{ width: '100vw', height: '100vh' }}></div>

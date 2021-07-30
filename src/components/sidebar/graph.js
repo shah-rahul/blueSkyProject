@@ -15,8 +15,6 @@ class Graph extends Component {
     let list = [];
     let list2 = [];
 
-    console.log(range1);
-    console.log(range2);
 
     Data.forEach((item) => {
       if (item.location == country && item.category == gases) {
@@ -41,7 +39,6 @@ class Graph extends Component {
     this.setState({
       list: finalList,
     });
-    console.log(this.state.list);
   }
   componentDidMount() {
     this.initData(
@@ -53,7 +50,6 @@ class Graph extends Component {
     );
   }
   render() {
-    console.log(this.state.list);
     return (
       <div
         style={{
