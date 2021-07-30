@@ -27,10 +27,12 @@ export default function Sidebar() {
           <br />
           <CountrySelecttwo setSelectedCountry={setSelectedCountry2} />
           <br />
-          <div className="container">
-            <Range1 setSelectedRange1={setSelectedRange1}/>
-          <br />
-            <Range2 setSelectedRange2={setSelectedRange2}/>
+          <div className='container'>
+            <h3>start range</h3>
+            <Range1 setSelectedRange1={setSelectedRange1} />
+            <br />
+            <h3> end range</h3>
+            <Range2 setSelectedRange2={setSelectedRange2} />
           </div>
           <br />
           <ParameterSelect setSelectedEmission={setSelectedEmission} />
