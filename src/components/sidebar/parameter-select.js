@@ -6,20 +6,11 @@ import Dropdown from 'react-dropdown';
 class ParameterSelect extends Component {
   state = {
     list: [],
-    pramList: ['co2-Emmisions'],
   };
   // for creating array that is further passed
   change(e) {
-    console.log('called');
-    if (this.state.pramList.length == 1) { //check for 1st addition
-      this.state.pramList.push(e);
-    } else {
-      this.setState({
-        pramList: [...this.state.pramList, e], //2nd addition 
-      });
-    }
 
-    this.props.setSelectedEmission(this.state.pramList); //sends data to hook
+    this.props.setSelectedEmission(e); //sends data to hook
   }
  
   // adds data to dropdown when its mounted

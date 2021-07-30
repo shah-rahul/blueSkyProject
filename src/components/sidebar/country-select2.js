@@ -3,7 +3,7 @@ import 'react-dropdown/style.css';
 import Data from '../../data.json';
 import Dropdown from 'react-dropdown';
 
-class CountrySelect extends Component {
+class CountrySelecttwo extends Component {
   state = {
     list: [],
     countryList: ['Australia'],
@@ -40,4 +40,4 @@ class CountrySelect extends Component {
   }
 }
 
-export default CountrySelect;
+export default CountrySelecttwo;

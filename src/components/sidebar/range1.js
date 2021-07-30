@@ -3,20 +3,19 @@ import 'react-dropdown/style.css';
 import Data from '../../data.json';
 import Dropdown from 'react-dropdown';
 
-class CountrySelect extends Component {
+class Range1 extends Component {
   state = {
     list: [],
-    countryList: ['Australia'],
   };
   //passes data to hook
   change(e) {
-    this.props.setSelectedCountry(e);
+    this.props.setSelectedRange1(e);
   }
   // initialises data when component gets loaded once
   componentDidMount() {
     let locallist = [];
     Data.map((item) => {
-      locallist.push(item.location);
+      locallist.push(item.year);
     });
 
     let unique = [...new Set(locallist)]; //seprates duplicate entries
@@ -32,7 +31,7 @@ class CountrySelect extends Component {
         <Dropdown
           onChange={(e) => this.change(e.value)}
           options={this.state.list}
-          value={this.state.list[0]}
+          value={'1990'}
           placeholder='Select an option'
         />
       </div>
@@ -40,4 +39,4 @@ class CountrySelect extends Component {
   }
 }
 
-export default CountrySelect;
+export default Range1;
