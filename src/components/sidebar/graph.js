@@ -14,33 +14,48 @@ class Graph extends Component {
     let finalList = [];
     let list = [];
     let list2 = [];
-
+    console.log(country, countrytwo);
 
     Data.forEach((item) => {
       if (item.location == country && item.category == gases) {
         list.push([item.year, item.value]);
       }
-      finalList = [{ data: list }];
+      let newList = list.filter((ele) => ele[0] >= range1 && ele[0] <= range2);
+      list = newList;
     });
     Data.forEach((item) => {
       if (item.location == countrytwo && item.category == gases) {
         list2.push([item.year, item.value]);
       }
-      finalList = [{ data: list }, { data: list2 }];
+      let newList2 = list2.filter(
+        (ele) => ele[0] >= range1 && ele[0] <= range2
+      );
+      list2 = newList2;
     });
-    finalList.forEach((item) =>
-      item.data.forEach((e) => {
-        if (e[0] < range1) {
-          let index = item.data.findIndex((f) => f === e);
-          item.data.splice(index);
-        }
-      })
-    );
+
+    finalList = [{ data: list }, { data: list2 }];
+
     this.setState({
       list: finalList,
     });
   }
+
+  changeUrl = (gases, range1, range2, country, countrytwo) => {
+    window.history.replaceState(
+      null,
+      'arabgfhosdhguo',
+      `emission-of-${gases}-bw-${range1}&${range2}of${country}and${countrytwo} `
+    );
+  };
+
   componentDidMount() {
+    this.changeUrl(
+      this.props.gases,
+      this.props.range1,
+      this.props.range2,
+      this.props.country,
+      this.props.countrytwo,
+    );
     this.initData(
       this.props.country,
       this.props.countrytwo,
@@ -50,6 +65,7 @@ class Graph extends Component {
     );
   }
   render() {
+    console.log(this.state.list);
     return (
       <div
         style={{
