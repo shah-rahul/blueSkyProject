@@ -1,49 +1,106 @@
 import React, { Component } from 'react';
-import mapboxgl from 'mapbox-gl';
+import SvgMap from './map';
+import Dropdown from 'react-dropdown';
 import Data from '../../data.json';
-mapboxgl.accessToken =
-  'pk.eyJ1Ijoic2hhaHJhaHVsNzk1IiwiYSI6ImNrcm5oMG9kdTB3enYyd25vMW80ZXIyZ2cifQ.41G1tkWHDF8OOGTtBfs7aQ';
 
 class Map extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      center: [],
-      zoom: 5,
-    };
+  state = {
+    list: [],
+    value: 'co2-Emmisions',
+  };
+
+  componentDidMount() {
+    let locallist = [];
+    Data.map((item) => {
+      locallist.push(item.year);
+    });
+
+    let unique = [...new Set(locallist)]; //seprates duplicate entries
+
+    this.setState({
+      list: unique,
+    });
+  }
+  change(e) {
+    this.setState({
+      value: e,
+    });
   }
 
-  returnCoordinates = () => {
-    let coor = [];
-    let arr = [];
-    Data.forEach((item) => {
-      if (item.location == this.props.country) {
-        coor.push([item.lang, item.lat]);
-      }
-    });
-    arr.push(coor[1][0]);
-    arr.push(coor[1][1]);
-    console.log(arr);
-
-    return arr;
-  };
-  componentDidMount = async () => {
-    let circle = await this.returnCoordinates();
-    console.log(circle)
-    const map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: circle,
-      zoom: this.state.zoom,
-    });
-  };
   render() {
+    let countryMap = this.props.country;
+    let gas = this.props.gases;
+
     return (
-      <div className='div'>
-        <h1>{(this.state.center[0], this.state.center[1])}</h1>
+      <div className='map'>
+        <h2>year for map</h2>
+        <div className=''>
+          <Dropdown
+            onChange={(e) => this.change(e.value)}
+            options={this.state.list}
+            value={'1990'}
+            placeholder='Select an option'
+          />
+        </div>
         <div
-          ref={(el) => (this.mapContainer = el)}
-          style={{ width: '100vw', height: '100vh' }}></div>
+          style={{
+            marginTop: '10px',
+            display: 'flex',
+            flexFlow: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <div
+            className='square'
+            style={{
+              height: '50px',
+              width: '50px',
+              backgroundColor: '#A40606',
+            }}></div>
+          <h4>{`>50000`}</h4>
+          <div
+            className='square'
+            style={{
+              height: '50px',
+              width: '50px',
+              backgroundColor: '#FF7F11',
+            }}></div>
+          <h4>{`>20000`}</h4>
+          <div
+            className='square'
+            style={{
+              height: '50px',
+              width: '50px',
+              backgroundColor: '#663a82',
+            }}></div>
+          <h4>{`>10000`}</h4>
+          <div
+            className='square'
+            style={{
+              height: '50px',
+              width: '50px',
+              backgroundColor: '#E86A92',
+            }}></div>
+          <h4>{`>5000`}</h4>
+
+          <div
+            className='square'
+            style={{
+              height: '50px',
+              width: '50px',
+              backgroundColor: '#F06543',
+            }}></div>
+          <h4>{`>2500`}</h4>
+
+          <div
+            className='square'
+            style={{
+              height: '50px',
+              width: '50px',
+              backgroundColor: '#bca0dc',
+            }}></div>
+          <h4>{`>500`}</h4>
+        </div>
+        <SvgMap country={countryMap} year={this.state.value} category={gas} />
       </div>
     );
   }

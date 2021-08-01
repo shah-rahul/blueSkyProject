@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'react-dropdown/style.css';
-import Data from '../../data.json';
 import Dropdown from 'react-dropdown';
+import Data from '../../data.json';
 
 class Range1 extends Component {
   state = {
