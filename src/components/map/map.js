@@ -4,27 +4,30 @@ class SvgMap extends Component {
   state = {
     list: [],
   };
-  returnFill = (title) => {
+  returnFill = (title) => {           //return color for fill of all maps
     let value = '';
     let color = 'blue';
-    this.state.list.forEach((c) => {
-      if (c == title) {
+    this.state.list.forEach((c) => {   //loop through total countries
+      if (c == title) {                //check country against the svg maps of seprate countries
         Data.map((item) => {
           if (
-            item.year == this.props.year &&
+            item.year == this.props.year &&  
             item.location == c &&
             item.category == this.props.category
           ) {
             value = item.value;
           }
         });
-        console.log(value);
       }
     });
-    if (value > 50000) {
+    if (value > 50000) {              //svg color map 
       color = '#A40606';
+    }  else if (value > 40000) {
+      color = '#7678ED';
+    } else if (value > 30000) {
+      color = '#F35B04';
     } else if (value > 20000) {
-      color = '#FF7F11';
+      color = '#62A87C';
     } else if (value > 10000) {
       color = '#663a82';
     } else if (value > 5000) {
@@ -33,7 +36,7 @@ class SvgMap extends Component {
       color = '#F06543';
     } else if(value > 500) {
       color = '#bca0dc';
-    } else {
+    } else { 
       color = 'grey'
     }
   
@@ -43,7 +46,7 @@ class SvgMap extends Component {
   componentDidMount() {
     let locallist = [];
     Data.map((item) => {
-      locallist.push(item.location);
+      locallist.push(item.location);  //makes list of all countries
     });
 
     let unique = [...new Set(locallist)]; //seprates duplicate entries
