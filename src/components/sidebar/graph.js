@@ -10,54 +10,58 @@ class Graph extends Component {
     list: [],
   };
   // initilises the graph data then further used to change it as per selection on 2nd and third index
-  initData(country, countrytwo, gases, range1, range2) {
+  initData(country, gases, range1, range2) {
     let finalList = [];
-    let list = [];
-    let list2 = [];
 
-    console.log(range1);
-    console.log(range2);
-
-    Data.forEach((item) => {
-      if (item.location == country && item.category == gases) {
-        list.push([item.year, item.value]);
-      }
-      finalList = [{ data: list }];
-    });
-    Data.forEach((item) => {
-      if (item.location == countrytwo && item.category == gases) {
-        list2.push([item.year, item.value]);
-      }
-      finalList = [{ data: list }, { data: list2 }];
-    });
-    finalList.forEach((item) =>
-      item.data.forEach((e) => {
-        if (e[0] < range1) {
-          let index = item.data.findIndex((f) => f === e);
-          item.data.splice(index);
+    country.forEach((c) => {
+      let list = [];
+      console.log(c);
+      Data.forEach((item) => {
+        if (item.location == c && item.category == gases) {
+          list.push([item.year, item.value]);
         }
-      })
-    );
+        let newList = list.filter(
+          (ele) => ele[0] >= range1 && ele[0] <= range2
+        );
+        list = newList;
+      });
+      finalList = [...finalList, { data: list }];
+    });
+
+    console.log(finalList);
+
     this.setState({
       list: finalList,
     });
-    console.log(this.state.list);
   }
+
+  changeUrl = (gases, range1, range2, country) => {
+    window.history.replaceState(
+      null,
+      'arabgfhosdhguo',
+      `emission-of-${gases}-bw-${range1}&${range2}of${country}`
+    );
+  };
+
   componentDidMount() {
+    this.changeUrl(
+      this.props.gases,
+      this.props.range1,
+      this.props.range2,
+      this.props.country
+    );
     this.initData(
       this.props.country,
-      this.props.countrytwo,
       this.props.gases,
       this.props.range1,
       this.props.range2
     );
   }
   render() {
-    console.log(this.state.list);
     return (
       <div
         style={{
-          width: '400px',
+          width: '100%',
           height: '300px',
         }}
         className='chart'>
@@ -73,7 +77,6 @@ class Graph extends Component {
             e.preventDefault();
             this.initData(
               this.props.country,
-              this.props.countrytwo,
               this.props.gases,
               this.props.range1,
               this.props.range2
@@ -81,10 +84,7 @@ class Graph extends Component {
           }}>
           update
         </button>
-        <p>
-          Example Graph {this.props.gases} / {this.props.country} /{' '}
-          {this.props.countrytwo}
-        </p>
+
         <Chart data={this.state.list} axes={this.state.axes} />
       </div>
     );

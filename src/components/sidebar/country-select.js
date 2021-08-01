@@ -10,7 +10,15 @@ class CountrySelect extends Component {
   };
   //passes data to hook
   change(e) {
-    this.props.setSelectedCountry(e);
+    if (this.state.countryList.length == 1) {
+      this.state.countryList.push(e);
+    } else {
+      this.setState({
+        countryList: [...this.state.countryList, e],
+      });
+    }
+
+    this.props.setSelectedCountry(this.state.countryList);
   }
   // initialises data when component gets loaded once
   componentDidMount() {
@@ -41,3 +49,4 @@ class CountrySelect extends Component {
 }
 
 export default CountrySelect;
+
