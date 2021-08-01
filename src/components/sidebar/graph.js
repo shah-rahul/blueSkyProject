@@ -73,6 +73,12 @@ class Graph extends Component {
           }}
           onClick={(e) => {
             e.preventDefault();
+            this.changeUrl(
+              this.props.gases,
+              this.props.range1,
+              this.props.range2,
+              this.props.country
+            );
             this.initData(
               this.props.country,
               this.props.gases,
