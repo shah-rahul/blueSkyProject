@@ -12,7 +12,7 @@ class Map extends Component {
   componentDidMount() {
     let locallist = [];
     Data.map((item) => {
-      locallist.push(item.year);
+      locallist.push(item.year); // for list for dropdown
     });
 
     let unique = [...new Set(locallist)]; //seprates duplicate entries
@@ -23,7 +23,7 @@ class Map extends Component {
   }
   change(e) {
     this.setState({
-      value: e,
+      value: e, //changes value of year for map
     });
   }
 
@@ -36,7 +36,7 @@ class Map extends Component {
         <h2>year for map</h2>
         <div className=''>
           <Dropdown
-            onChange={(e) => this.change(e.value)}
+            onChange={(e) => this.change(e.value)} //map value change
             options={this.state.list}
             value={'1990'}
             placeholder='Select an option'
@@ -62,9 +62,26 @@ class Map extends Component {
             style={{
               height: '50px',
               width: '50px',
-              backgroundColor: '#FF7F11',
+              backgroundColor: '#7678ED',
+            }}></div>
+          <h4>{`>40000`}</h4>
+          <div
+            className='square'
+            style={{
+              height: '50px',
+              width: '50px',
+              backgroundColor: '#F35B04',
+            }}></div>
+          <h4>{`>30000`}</h4>
+          <div
+            className='square'
+            style={{
+              height: '50px',
+              width: '50px',
+              backgroundColor: '#62A87C',
             }}></div>
           <h4>{`>20000`}</h4>
+
           <div
             className='square'
             style={{

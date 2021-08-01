@@ -13,10 +13,9 @@ class Graph extends Component {
   initData(country, gases, range1, range2) {
     let finalList = [];
 
-    country.forEach((c) => {
+    country.forEach((c) => {      //loops through list of countries
       let list = [];
-      console.log(c);
-      Data.forEach((item) => {
+      Data.forEach((item) => {           
         if (item.location == c && item.category == gases) {
           list.push([item.year, item.value]);
         }
@@ -28,7 +27,6 @@ class Graph extends Component {
       finalList = [...finalList, { data: list }];
     });
 
-    console.log(finalList);
 
     this.setState({
       list: finalList,
@@ -39,7 +37,7 @@ class Graph extends Component {
     window.history.replaceState(
       null,
       'arabgfhosdhguo',
-      `emission-of-${gases}-bw-${range1}&${range2}of${country}`
+      `emission-of-${gases}-bw-${range1}&${range2}of${country.toString()}` //changes url
     );
   };
 
