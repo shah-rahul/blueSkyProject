@@ -6,7 +6,7 @@ import Data from '../../data.json';
 class Map extends Component {
   state = {
     list: [],
-    value: 'co2-Emmisions',
+    value: 1990,
   };
 
   componentDidMount() {
@@ -28,9 +28,7 @@ class Map extends Component {
   }
 
   render() {
-    let countryMap = this.props.country;
     let gas = this.props.gases;
-
     return (
       <div className='map'>
         <h2>year for map</h2>
@@ -117,7 +115,7 @@ class Map extends Component {
             }}></div>
           <h4>{`>500`}</h4>
         </div>
-        <SvgMap country={countryMap} year={this.state.value} category={gas} />
+        <SvgMap year={this.state.value} category={gas} />
       </div>
     );
   }

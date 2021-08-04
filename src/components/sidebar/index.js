@@ -12,6 +12,15 @@ export default function Sidebar() {
   const [selectedRange1, setSelectedRange1] = useState('1990'); //hook to pass gases array to graph
   const [selectedRange2, setSelectedRange2] = useState('2014'); //hook to pass gases array to graph
 
+  function removeCountry(f) {
+    let index = selectedCountry.findIndex((ele) => ele == f);
+    selectedCountry.splice(index, 1);
+    setSelectedCountry((selectedCountry) => [
+      ...selectedCountry,
+      selectedCountry.splice(index, 1),
+    ]);
+  }
+
   return (
     <React.Fragment>
       <div className='sidebar'>
@@ -22,16 +31,24 @@ export default function Sidebar() {
           }}>
           <h3>selected country</h3>
           <CountrySelect setSelectedCountry={setSelectedCountry} />
-          <div
-            style={{
-              display: 'flex',
-              flexFlow: 'row',
-              justifyContent: 'space-between',
-            }}>
-            {selectedCountry.map((e) => {
-              return <h3>{e}</h3>;
+
+          <div className='col'>
+            {selectedCountry.map((f) => {
+              return (
+                <div className='row'>
+                  <p>{f}</p>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      removeCountry(f);
+                    }}>
+                    delete
+                  </button>
+                </div>
+              );
             })}
           </div>
+
           <div
             className='container'
             style={{
@@ -62,7 +79,7 @@ export default function Sidebar() {
         />
       </div>
       <div className='div'>
-        <Map country={selectedCountry} gases={selectedEmmision} />
+        <Map gases={selectedEmmision} />
       </div>
     </React.Fragment>
   );

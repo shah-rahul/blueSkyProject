@@ -10,7 +10,30 @@
   flex-direction: column;
   justify-content: space-evenly;
 }
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid;
+  border-radius: 5px;
+  margin-top: 1em;
 
+}
+p{
+  margin: 5px;
+}
+button{
+  margin : 1em;
+  color: black;
+  background: white;
+  border: solid 1px;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
 .map {
   width: 100%;
   margin-left: 6rem;
@@ -20,19 +43,15 @@
   flex-direction: column;
 }
 
-.dropdowns{
+.dropdowns {
   display: flex;
   flex-direction: column;
   margin: 1rem;
 }
 
-
-
-.parameter-select{
+.parameter-select {
   margin-top: 1rem;
 }
-
-
 
 .chart {
   margin: 1rem;

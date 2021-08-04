@@ -19,7 +19,7 @@ class Range1 extends Component {
     });
 
     let unique = [...new Set(locallist)]; //seprates duplicate entries
-
+    unique = unique.reverse()
     this.setState({
       list: unique,
     });
